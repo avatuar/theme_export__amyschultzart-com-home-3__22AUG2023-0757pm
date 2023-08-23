@@ -1,0 +1,184 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-contact-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="section-contact-v1">
+    <div class="container container-v1">
+      <div class="row"> 
+        <div class="col-md-6 contact-left">
+          <div class="contact-wrap">
+            {% form 'contact' %}
+
+            {% if form.posted_successfully? %}
+            <div class="alert alert-success alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <p style="margin-bottom: 5px;">
+                {{ 'contact.form.post_success' | t }}
+              </p>
+            </div>
+            {% endif %}
+
+            {% if form.errors %}
+            <div class="alert alert-success alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <!-- {{ form.errors.size }} or {{ form.errors | size }} -->
+              <p style="margin-bottom: 5px;">Your contact form has {{ form.errors | size | pluralize: "an error", "a few errors" }}. To submit your form, make the following changes and try again:</p>
+              {% for field in form.errors %}
+              <p style="margin-bottom: 5px;">The {{ field | capitalize | replace: 'Body', 'Message' }} field {{ form.errors.messages[field] }}.</p>
+              {% endfor %}
+            </div>
+            {% endif %}
+            <div class="contact-form">
+
+              <div class="contact_item">
+                <input class="" placeholder="Name" type="text" id="contactFormName" name="contact[name]" required>
+              </div>
+              <div class="contact_item">
+                <input class="" placeholder="Email" type="email" id="contactFormEmail" name="contact[email]" required>
+              </div>
+
+              <div class="contact_item">
+                <textarea class="" placeholder="Message" cols="30" rows="10" id="contactFormMessage" name="contact[body]" required></textarea>
+              </div>
+
+              <div class="contact-submit">
+                <input  class="shop-button" type="submit" value="Send">
+              </div>
+            </div>
+            {% endform %}
+          </div>
+        </div>
+
+        <div class="col-md-6 contact-right">
+          <div class="contact-content">
+            {% if section.settings.title_contact != blank %}
+            <h3 class="title_contact">{{section.settings.title_contact}}</h3>
+            {% endif %}
+
+            {% if section.settings.content_contact != blank %}
+            <p class="sub_title">{{section.settings.content_contact}}</p>
+            {% endif %}      
+            
+            <div class="box-wrap">
+              <div class="box-item">
+                <div class="box-icon">
+                  {{section.settings.icon_svg_1}}
+                </div>
+                <div class="box-info">
+                  {{section.settings.block_title_1}}
+                </div>
+              </div>
+              <div class="box-item">
+                <div class="box-icon">
+                  {{section.settings.icon_svg_2}}
+                </div>
+                <div class="box-info">
+                  {{section.settings.block_title_2}}
+                </div>
+              </div>
+              <div class="box-item">
+                <div class="box-icon">
+                  {{section.settings.icon_svg_3}}
+                </div>
+                <div class="box-info">
+                  {{section.settings.block_title_3}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "CONTACT V1",
+  "settings": [
+  	{
+      "type": "header",
+      "content": "Settings Contact"
+    },
+	{
+      "type": "text",
+      "id": "title_contact",
+      "label": "Title",
+      "default": "Contact Me"
+    },
+    {
+      "type": "textarea",
+      "id": "content_contact",
+      "label": "Content Contact",
+      "default": "Alienum phaedrum torquatos nec eu, vis detraxitssa periculiser ex, nihil expetendis in mei eis an pericu la es aperiri consequat."
+    },
+	{
+      "type": "header",
+      "content": "Settings Mail"
+    },
+    {
+      "type": "textarea",
+      "id": "icon_svg_1",
+      "label": "Icon Mail"
+    },
+    {
+      "type": "text",
+      "id": "block_title_1",
+      "label": "Title",
+      "default": "support@mycompany.com"
+    },
+	{
+      "type": "header",
+      "content": "Settings Phone"
+    },
+    {
+      "type": "textarea",
+      "id": "icon_svg_2",
+      "label": "Icon Phone"
+    },
+    {
+      "type": "text",
+      "id": "block_title_2",
+      "label": "Title",
+      "default": "(+01) 234-567-89"
+    },
+	{
+      "type": "textarea",
+      "id": "icon_svg_3",
+      "label": "Icon Fax"
+    },
+    {
+      "type": "text",
+      "id": "block_title_3",
+      "label": "Title",
+      "default": "+44 161 999 8888"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "presets": [
+    {
+      "name": "CONTACT V1",
+      "category": "HOME"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
